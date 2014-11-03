@@ -47,30 +47,31 @@ public class AVL {
 		}
 		return;
 	}
-	public void preOrder(Node n, PrintWriter pw){
-		if(n != null){
-			pw.println(n.key);
-			if(n.left != null)
-				preOrder(n.left, pw);
-			if(n.right != null)
-				preOrder(n.right, pw);
+	public static void preOrder(NodeAVL r, PrintWriter pw){
+		if(r != null){
+			pw.println(r.key);
+			if(r.left != null)
+				preOrder(r.left, pw);
+			if(r.right != null)
+				preOrder(r.right, pw);
 		}
 	}
-	public int numRandom(int min, int max){
+	public static int numRandom(int min, int max){
 		return ((int)(Math.random()*max-min+1));
 	}
 	static public void main(String[] args) throws Exception{
 		PrintWriter pw = new PrintWriter(new FileWriter("avl_test.txt"));
 		pw.println("AVL Test");
 		pw.println("");
-		ABB tree = new ABB();
-		int N = (int)Math.pow(2, 10);
+		NodeAVL r = new NodeAVL(0);
+		int N = (int)Math.pow(2, 18);
 		int max = (int)(Math.pow(2, 22)-1);
 		for(int i = 0; i < N; i++){
-			tree.insert(tree.numRandom(0, max), tree.root);
+			r.insertar(numRandom(1,max));
 		}
-		tree.preOrder(tree.root, pw);
+		preOrder(r, pw);
 		//System.out.println(max);
 		pw.close();
 	}
+
 }

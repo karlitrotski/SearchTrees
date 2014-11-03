@@ -1,18 +1,20 @@
 
-public class NodeAVL extends NodeABB {
+public class NodeAVL {
 	int key;
 	NodeAVL left;
 	NodeAVL right;
 	int FE;
 	NodeAVL parent;
 	public NodeAVL(int key) {
-		super(key);
 		this.key=key;
 		this.left=null;
 		this.right=null;
 		this.FE=0;
 	}
-	
+
+	public static int numRandom(int min, int max){
+		return ((int)(Math.random()*max-min+1));
+	}
 	public void insertar(int key){
 		if(this.key<key){
 			if(this.right==null){
@@ -30,7 +32,7 @@ public class NodeAVL extends NodeABB {
 				NodeAVL nuevito = new NodeAVL(key);
 				nuevito.parent=this;
 				this.left=nuevito;
-				this.right.update();
+				this.left.update();
 			}
 			else{
 				this.left.insertar(key);
@@ -39,8 +41,19 @@ public class NodeAVL extends NodeABB {
 	}
 	public int calculateHeight(){
 		// calcular altura
-		int izq= left.FE;
-		int der = right.FE;
+		int izq,der;
+		if(this.left==null){
+			izq=0;
+		}
+		else{
+			izq= left.FE;
+		}
+		if(this.right==null){
+			der=0;
+		}
+		else{
+			der = right.FE;
+		}
 		return der-izq;
 	}
 	public void update(){
@@ -55,7 +68,11 @@ public class NodeAVL extends NodeABB {
 		else{
 			
 		}
-		parent.update();
+		if(parent!=null){
+			parent.update();
+		}
+		
+		
 	}
 	public void rotarDer(){
 		NodeAVL papa = this.parent;
