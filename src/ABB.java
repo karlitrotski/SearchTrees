@@ -1,11 +1,11 @@
 import java.io.PrintWriter;
 import java.io.FileWriter;
 public class ABB{
-	NodeABB root;
+	Node root;
 	public ABB(){
-		this.root = new NodeABB(-1);
+		this.root = new Node(-1);
 	}
-	public NodeABB search(int x, NodeABB n){
+	public Node search(int x, Node n){
 		if(n == null)
 			return null;
 		else if(n.key == -1)
@@ -17,24 +17,24 @@ public class ABB{
 		else
 			return search(x, n.right);
 	}
-	public void insert(int x, NodeABB n){
+	public void insert(int x, Node n){
 		if(n.key == -1)
 			n.key = x;
 		else if(x < n.key){
 			if(n.left == null)
-				n.left = new NodeABB(x);
+				n.left = new Node(x);
 			else
 				insert(x, n.left);
 		}
 		else if(x > n.key){
 			if(n.right == null)
-				n.right = new NodeABB(x);
+				n.right = new Node(x);
 			else
 				insert(x, n.right);
 		}
 		return;
 	}
-	public void preOrder(NodeABB n, PrintWriter pw){
+	public void preOrder(Node n, PrintWriter pw){
 		if(n != null){
 			pw.println(n.key);
 			if(n.left != null)
