@@ -95,8 +95,8 @@ public class SplayTree {
 		pw.println("SplayTree Test");
 		pw.println("");
 		SplayTree tree = new SplayTree();
-		//int N = (int)Math.pow(2, 10);
-		int N = 20;
+		int N = (int)Math.pow(2, 20);
+		//int N = 20;
 		int max = (int)(Math.pow(2, 22)-1);
 		int[] keys = new int[N];
 		pw.println("Keys Array:");
@@ -108,9 +108,14 @@ public class SplayTree {
 		pw.println("");
 		pw.println("Tree:");
 		pw.println("");
+		long ti, tf;
+		ti = System.currentTimeMillis();
 		for(int i = 0; i < N; i++){
 			tree.insert(keys[i]);
 		}
+		tf = System.currentTimeMillis();
+		pw.println("Tiempo Inserción: "+(tf-ti));
+		pw.println("");
 		tree.preOrder(tree.root, pw);
 		/*pw.println("");
 		pw.println("Zig Test");
