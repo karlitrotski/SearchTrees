@@ -53,7 +53,7 @@ public class AVL {
 			if(x<r.key){
 				r.left=insert(x,r.left);
 				if(height(r.right)-height(r.left)==-2){
-					if(x-r.left.key>0){
+					if(x-r.left.key<0){
 						r=simpleLeftRotation(r);
 					}
 					else{
@@ -98,16 +98,12 @@ public class AVL {
 		pw.println("AVL Test");
 		pw.println("");
 		AVL r = new AVL();
-//		int N = (int)Math.pow(2, 18);
-//		int max = (int)(Math.pow(2, 22)-1);
-		r.root=r.insert(0, r.root);
-		r.root=r.insert(3, r.root);
-		r.root=r.insert(4, r.root);
-		r.root=r.insert(5, r.root);
-		r.root=r.insert(6, r.root);
-//		for(int i = 0; i < N; i++){
-//			r.root=r.insert(numRandom(1,max),r.root);
-//		}
+		int N = (int)Math.pow(2, 18);
+		int max = (int)(Math.pow(2, 22)-1);
+
+		for(int i = 0; i < N; i++){
+			r.root=r.insert(numRandom(1,max),r.root);
+		}
 		r.preOrder(r.root,pw);
 		//System.out.println(max);
 		pw.close();
