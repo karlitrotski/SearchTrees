@@ -32,7 +32,7 @@ public class AVL {
 		return simpleRightRotation(k1);
 	}
 	
-	public Node search(int x, Node n){
+	public NodeAVL search(int x, NodeAVL n){
 		if(n == null)
 			return null;
 		else if(n.key == -1)
@@ -77,16 +77,19 @@ public class AVL {
 		}
 		
 	}
-    public void preOrder(NodeAVL n, PrintWriter pw){
-		if(n != null){
+    public int preOrder(NodeAVL n, PrintWriter pw){
+    	int p = 0;
+    	if(n != null){
 			pw.println(n.key);
+			p = 1;
 			if(n.left != null)
-				preOrder(n.left, pw);
+				p=p+preOrder(n.left, pw);
 			if(n.right != null)
-				preOrder(n.right, pw);
+				p=p+preOrder(n.right, pw);
 		}
+		return p;
 	}
-	public static int numRandom(int min, int max){
+	public int numRandom(int min, int max){
 		return ((int)(Math.random()*max-min+1));
 	}
 	
@@ -97,15 +100,43 @@ public class AVL {
 		PrintWriter pw = new PrintWriter(new FileWriter("avl_test.txt"));
 		pw.println("AVL Test");
 		pw.println("");
-		AVL r = new AVL();
-		int N = (int)Math.pow(2, 18);
+		AVL tree = new AVL();
+		int N = (int)Math.pow(2, 20);
+		//int N = 20;
 		int max = (int)(Math.pow(2, 22)-1);
-
+		int[] keys = new int[N];
+		pw.println("Keys Array:");
+		pw.println("");
 		for(int i = 0; i < N; i++){
-			r.root=r.insert(numRandom(1,max),r.root);
+			keys[i] = tree.numRandom(0, max);
+			pw.println(""+keys[i]);
 		}
-		r.preOrder(r.root,pw);
-		//System.out.println(max);
+		pw.println("");
+		pw.println("Tree:");
+		pw.println("");
+		long ti, tf;
+		ti = System.currentTimeMillis();
+		for(int i = 0; i < N; i++)
+			tree.root=tree.insert(keys[i],tree.root);
+		tf = System.currentTimeMillis();
+		pw.println("Número insertados: "+tree.preOrder(tree.root, pw));
+		
+		pw.println("Tiempo Inserción: "+(tf-ti));
+		int[] keysToSearch = new int[100*N];
+		for(int i = 0; i < N; i++){
+			keysToSearch[i] = tree.numRandom(0, max);
+			//pw.println(""+keys[i]);
+		}
+		int count = 0;
+		ti = System.currentTimeMillis();
+		for(int i = 0; i < 100*N; i++){
+			NodeAVL found = tree.search(keysToSearch[i],tree.root);
+			if(found != null)
+				count++;
+		}
+		tf = System.currentTimeMillis();
+		pw.println("Tiempo Búsqueda: "+(tf-ti));
+		pw.println("Coincidencias: "+count);
 		pw.close();
 	}
 
