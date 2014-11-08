@@ -47,12 +47,13 @@ public class VEBTree {
 			//cosas
 			r.max=x; // hay que insertarlo igual
 		}
-		// está dentro de los boundaries de los hijos 
-		int i = (int) Math.floor(x/r.U);
+		// está dentro de los boundaries de los hijos
+		int raiz = r.higherSquareRoot();
+		int i = (int) Math.floor(x/raiz);
 		// al parecer insertaremos el modulo desde el floor. juej
-		insert(x%r.U,r.cluster[i]);
+		insert(x%raiz,r.cluster[i]);
 		if(r.cluster[i].min == r.cluster[i].max){
-			insert (i,r.summary);
+			insert(i,r.summary);
 		}
 			// más cosas
 		
@@ -64,6 +65,14 @@ public class VEBTree {
 		int M = (int) Math.pow(2, 20);
 		tree.root=new vEBNode(M);
 		
+		tree.insert(0, tree.root);
+		tree.insert(10, tree.root);
+		tree.insert(100, tree.root);
+		tree.insert(1000, tree.root);
+		tree.insert(10000, tree.root);
+		tree.insert(100000, tree.root);
+		tree.insert(1000000, tree.root);
+		// tirate un breakpoint en la linea anterior y debugea, ahi vai a ver los cosos juej
 		
 		
 	}

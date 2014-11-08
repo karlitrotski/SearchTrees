@@ -6,7 +6,7 @@ public class vEBNode {
 	vEBNode summary;
 	vEBNode[] cluster;
 	public vEBNode(int U){
-		min = -1;
+		min = higherSquareRoot();
 		max = -1;	
 		this.U = U;
 		
