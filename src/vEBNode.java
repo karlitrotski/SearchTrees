@@ -6,10 +6,9 @@ public class vEBNode {
 	vEBNode summary;
 	vEBNode[] cluster;
 	public vEBNode(int U){
-		min = higherSquareRoot();
+		min = U; // el min se inicializa como  M (U, tamaño de lo posible almacenar por el árbol)
 		max = -1;	
 		this.U = U;
-		
 		/* Allocate the summary and cluster children. */
 		initializeChildren(U);
 	}
@@ -33,5 +32,10 @@ public class vEBNode {
 	 */
 	public int higherSquareRoot(){
 		return (int)Math.pow(2, Math.ceil((Math.log10(U) / Math.log10(2)) / 2));
+	}
+	
+	public int lowerSquareRoot(){
+		return (int)Math.pow(2, Math.floor((Math.log10(U) / Math.log10(2)) / 2));
+//		return (int) Math.pow(2, Math.floor((Math.log10(U)/2)));
 	}
 }
